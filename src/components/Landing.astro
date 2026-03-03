@@ -28,7 +28,27 @@ const otherLangUrl = getAlternateUrl(Astro.url, otherLang as Lang);
       <a href={otherLangUrl} class="hidden md:block hover:text-blue-400 transition-colors">{languages[otherLang]}</a>
       <a
         href={appUrl}
-        class="bg-white text-black px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 transform active:scale-95 shadow-xl shadow-white/5"
+        class="hidden md:inline-block bg-white text-black px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 transform active:scale-95 shadow-xl shadow-white/5"
+      >
+        {t(lang, 'nav.logIn')}
+      </a>
+      <!-- Mobile hamburger button -->
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="bar1"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="bar2"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="bar3"></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/5 px-6 pb-8 pt-4">
+    <div class="flex flex-col gap-6 text-sm font-bold tracking-widest uppercase text-gray-400">
+      <a href="#features" class="hover:text-blue-400 transition-colors mobile-nav-link">{t(lang, 'nav.experience')}</a>
+      <a href="#vision" class="hover:text-blue-400 transition-colors mobile-nav-link">{t(lang, 'nav.vision')}</a>
+      <a href={otherLangUrl} class="hover:text-blue-400 transition-colors">{languages[otherLang]}</a>
+      <a
+        href={appUrl}
+        class="bg-white text-black px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 text-center shadow-xl shadow-white/5"
       >
         {t(lang, 'nav.logIn')}
       </a>
@@ -255,8 +275,9 @@ const otherLangUrl = getAlternateUrl(Astro.url, otherLang as Lang);
   </div>
 </footer>
 
-<!-- Scroll reveal script -->
+<!-- Scroll reveal + mobile menu script -->
 <script>
+  // Scroll reveal
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -269,6 +290,34 @@ const otherLangUrl = getAlternateUrl(Astro.url, otherLang as Lang);
   );
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+
+  if (menuBtn && mobileMenu && bar1 && bar2 && bar3) {
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      // Animate hamburger to X
+      bar1.style.transform = isOpen ? '' : 'rotate(45deg) translate(4px, 4px)';
+      bar2.style.opacity = isOpen ? '1' : '0';
+      bar3.style.transform = isOpen ? '' : 'rotate(-45deg) translate(4px, -4px)';
+    });
+
+    // Close menu when clicking a nav link
+    mobileMenu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        bar1.style.transform = '';
+        bar2.style.opacity = '1';
+        bar3.style.transform = '';
+      });
+    });
+  }
 </script>
 
 <style>

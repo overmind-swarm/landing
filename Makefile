@@ -81,7 +81,7 @@ prod-deploy: ## Deploy current git-tag version to production via kustomize
 		exit 1; \
 	fi
 	@echo "Deploying $(IMAGE_NAME):$(VERSION) to production..."
-	@sed -i "s|$(PROD_REGISTRY)/$(IMAGE_NAME):latest|$(PROD_REGISTRY)/$(IMAGE_NAME):$(VERSION)|g" deploy/overlays/prod/kustomization.yaml
+	@sed -i "s|$(PROD_REGISTRY)/$(IMAGE_NAME):[^ \"]*|$(PROD_REGISTRY)/$(IMAGE_NAME):$(VERSION)|g" deploy/overlays/prod/kustomization.yaml
 	kubectl --context=$(PROD_CONTEXT) apply -k deploy/overlays/prod/
 	kubectl --context=$(PROD_CONTEXT) rollout status deployment/$(IMAGE_NAME) -n $(PROD_NAMESPACE) --timeout=180s
 	@git checkout deploy/overlays/prod/kustomization.yaml

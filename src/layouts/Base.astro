@@ -9,7 +9,6 @@ const currentLang = Astro.props.lang ?? getLangFromUrl(Astro.url);
 const title = t(currentLang, 'seo.title');
 const description = t(currentLang, 'seo.description');
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const appUrl = 'https://app.curiabots.com/login';
 
 // Build alternate links for hreflang
 const alternates = Object.keys(languages).map((lang) => ({
@@ -58,11 +57,15 @@ const jsonLd = {
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:site_name" content="CuriaBots" />
     <meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:image" content={new URL('/og-image.svg', Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.svg', Astro.site).href} />
 
     <!-- Misc -->
     <meta name="generator" content={Astro.generator} />
