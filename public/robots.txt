@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://curiabots.com/sitemap-index.xml

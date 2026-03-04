@@ -1,0 +1,81 @@
+---
+import { t, getLangFromUrl, getAlternateUrl, type Lang, languages } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const currentLang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const title = t(currentLang, 'seo.title');
+const description = t(currentLang, 'seo.description');
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+// Build alternate links for hreflang
+const alternates = Object.keys(languages).map((lang) => ({
+  lang,
+  href: new URL(getAlternateUrl(Astro.url, lang as Lang), Astro.site).href,
+}));
+
+// JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'CuriaBots',
+  applicationCategory: 'ProductivityApplication',
+  operatingSystem: 'Web',
+  url: 'https://curiabots.com',
+  description: t(currentLang, 'seo.description'),
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+---
+
+<!doctype html>
+<html lang={currentLang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl.href} />
+
+    <!-- Hreflang -->
+    {alternates.map(({ lang, href }) => (
+      <link rel="alternate" hreflang={lang} href={href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:site_name" content="CuriaBots" />
+    <meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:image" content={new URL('/og-image.svg', Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.svg', Astro.site).href} />
+
+    <!-- Misc -->
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen bg-black text-white selection:bg-blue-500/30 antialiased">
+    <slot />
+  </body>
+</html>

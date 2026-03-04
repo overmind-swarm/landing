@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#000"/>
+  <rect x="525" y="200" width="50" height="50" rx="10" fill="#4F46E5"/>
+  <path d="M540 215 L555 225 L540 235Z" fill="white" stroke="white" stroke-width="1"/>
+  <text x="600" y="340" font-family="system-ui,-apple-system,sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-3">CuriaBots</text>
+  <text x="600" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="24" fill="#9CA3AF" text-anchor="middle">AI-powered personal automation</text>
+</svg>
