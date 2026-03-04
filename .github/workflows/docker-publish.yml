@@ -111,6 +111,10 @@ jobs:
           kubectl rollout status deployment/${{ env.IMAGE_NAME }} -n ${{ env.DEPLOY_NAMESPACE }} --timeout=180s
 
       - name: Persist image tag to repo
+        # Pushes the updated prod image tag back to main. This follows the
+        # same pattern as all other org repos (app, backend, etc.). The
+        # "[skip ci]" suffix prevents recursive workflow triggers.
+        # If branch protection is enabled later, use a PAT or GitHub App token.
         if: steps.version.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
