@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
 env:
   IMAGE_NAME: landing
   REGISTRY: registry.overmind-platform.svc:5000
@@ -19,6 +23,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -98,7 +103,12 @@ jobs:
         run: |
           kubectl port-forward -n ${{ env.REGISTRY_NAMESPACE }} ${{ env.REGISTRY_SVC }} ${{ env.LOCAL_PORT }}:5000 &
           PF_PID=$!
-          sleep 3
+          for i in $(seq 1 30); do
+            nc -z localhost ${{ env.LOCAL_PORT }} && break
+            echo "Waiting for port-forward... ($i/30)"
+            sleep 1
+          done
+          nc -z localhost ${{ env.LOCAL_PORT }} || { echo "Port-forward failed to start"; kill $PF_PID 2>/dev/null; exit 1; }
           docker push localhost:${{ env.LOCAL_PORT }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.new_version }}
           kill $PF_PID 2>/dev/null
 
@@ -108,7 +118,12 @@ jobs:
           TAG="${{ steps.version.outputs.new_version }}"
           sed -i "s|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:[^ \"]*|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${TAG}|g" deploy/overlays/prod/kustomization.yaml
           kubectl apply -k deploy/overlays/prod/
-          kubectl rollout status deployment/${{ env.IMAGE_NAME }} -n ${{ env.DEPLOY_NAMESPACE }} --timeout=180s
+          if ! kubectl rollout status deployment/${{ env.IMAGE_NAME }} -n ${{ env.DEPLOY_NAMESPACE }} --timeout=180s; then
+            echo "Rollout failed — rolling back deployment/${{ env.IMAGE_NAME }}"
+            kubectl rollout undo deployment/${{ env.IMAGE_NAME }} -n ${{ env.DEPLOY_NAMESPACE }}
+            kubectl rollout status deployment/${{ env.IMAGE_NAME }} -n ${{ env.DEPLOY_NAMESPACE }} --timeout=120s || true
+            exit 1
+          fi
 
       - name: Persist image tag to repo
         # Pushes the updated prod image tag back to main. This follows the
