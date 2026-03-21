@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { t } from '../../i18n';
+---
+
+<Base lang="es" title={t('es', 'privacy.title') + ' — CuriaBots'} description={t('es', 'privacy.intro')}>
+  <LegalPage lang="es" page="privacy" />
+</Base>

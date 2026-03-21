@@ -1,0 +1,101 @@
+---
+import { t, type Lang } from '../i18n';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  lang: Lang;
+  page: 'privacy' | 'terms';
+}
+
+const { lang, page } = Astro.props;
+
+// Section definitions for each legal page
+const sections: Record<string, { titleKey: string; contentKeys: string[] }[]> = {
+  privacy: [
+    { titleKey: 'privacy.controllerTitle', contentKeys: ['privacy.controllerText'] },
+    { titleKey: 'privacy.dataCollectedTitle', contentKeys: ['privacy.dataCollectedText', 'privacy.dataCollectedItem1', 'privacy.dataCollectedItem2', 'privacy.dataCollectedItem3', 'privacy.dataCollectedItem4'] },
+    { titleKey: 'privacy.purposeTitle', contentKeys: ['privacy.purposeText', 'privacy.purposeItem1', 'privacy.purposeItem2', 'privacy.purposeItem3', 'privacy.purposeItem4'] },
+    { titleKey: 'privacy.sharingTitle', contentKeys: ['privacy.sharingText', 'privacy.sharingItem1', 'privacy.sharingItem2', 'privacy.sharingItem3', 'privacy.sharingNote'] },
+    { titleKey: 'privacy.retentionTitle', contentKeys: ['privacy.retentionText'] },
+    { titleKey: 'privacy.rightsTitle', contentKeys: ['privacy.rightsText', 'privacy.rightsItem1', 'privacy.rightsItem2', 'privacy.rightsItem3', 'privacy.rightsItem4', 'privacy.rightsItem5', 'privacy.rightsItem6', 'privacy.rightsExercise'] },
+    { titleKey: 'privacy.cookiesTitle', contentKeys: ['privacy.cookiesText'] },
+    { titleKey: 'privacy.securityTitle', contentKeys: ['privacy.securityText'] },
+    { titleKey: 'privacy.changesTitle', contentKeys: ['privacy.changesText'] },
+    { titleKey: 'privacy.contactTitle', contentKeys: ['privacy.contactText'] },
+  ],
+  terms: [
+    { titleKey: 'terms.serviceTitle', contentKeys: ['terms.serviceText'] },
+    { titleKey: 'terms.accountTitle', contentKeys: ['terms.accountText1', 'terms.accountText2', 'terms.accountText3'] },
+    { titleKey: 'terms.useTitle', contentKeys: ['terms.useText', 'terms.useItem1', 'terms.useItem2', 'terms.useItem3', 'terms.useItem4', 'terms.useItem5', 'terms.useNote'] },
+    { titleKey: 'terms.ipTitle', contentKeys: ['terms.ipText1', 'terms.ipText2'] },
+    { titleKey: 'terms.availabilityTitle', contentKeys: ['terms.availabilityText'] },
+    { titleKey: 'terms.liabilityTitle', contentKeys: ['terms.liabilityText'] },
+    { titleKey: 'terms.terminationTitle', contentKeys: ['terms.terminationText1', 'terms.terminationText2'] },
+    { titleKey: 'terms.lawTitle', contentKeys: ['terms.lawText'] },
+    { titleKey: 'terms.changesTitle', contentKeys: ['terms.changesText'] },
+    { titleKey: 'terms.contactTitle', contentKeys: ['terms.contactText'] },
+  ],
+};
+
+const pageSections = sections[page];
+const titleKey = `${page}.title` as const;
+const lastUpdatedKey = `${page}.lastUpdated` as const;
+const introKey = `${page}.intro` as const;
+
+// Determine which content keys are list items (contain "Item" in the key name)
+function isListItem(key: string): boolean {
+  return /Item\d+$/.test(key);
+}
+---
+
+<Nav lang={lang} />
+
+<main class="pt-32 pb-20 px-6">
+  <article class="max-w-3xl mx-auto">
+    <header class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-4">
+        {t(lang, titleKey)}
+      </h1>
+      <p class="text-sm text-white/40 font-bold tracking-widest uppercase">
+        {t(lang, lastUpdatedKey)}
+      </p>
+    </header>
+
+    <div class="text-white/70 leading-relaxed space-y-4 mb-12">
+      <p>{t(lang, introKey)}</p>
+    </div>
+
+    {pageSections.map((section) => {
+      const listItems = section.contentKeys.filter((k) => isListItem(k));
+      const paragraphs = section.contentKeys.filter((k) => !isListItem(k));
+      const noteKeys = section.contentKeys.filter((k) => k.endsWith('Note') || k.endsWith('Exercise'));
+      const regularParagraphs = paragraphs.filter((k) => !k.endsWith('Note') && !k.endsWith('Exercise'));
+
+      return (
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold mb-4 text-white">
+            {t(lang, section.titleKey as any)}
+          </h2>
+          <div class="text-white/70 leading-relaxed space-y-4">
+            {regularParagraphs.map((key) => (
+              <p>{t(lang, key as any)}</p>
+            ))}
+            {listItems.length > 0 && (
+              <ul class="list-disc list-outside ml-6 space-y-3">
+                {listItems.map((key) => (
+                  <li>{t(lang, key as any)}</li>
+                ))}
+              </ul>
+            )}
+            {noteKeys.map((key) => (
+              <p class="text-white/50 italic">{t(lang, key as any)}</p>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </article>
+</main>
+
+<Footer lang={lang} />
