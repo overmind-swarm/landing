@@ -74,7 +74,7 @@ export const translations = {
     'privacy.sharingTitle': '4. Data Sharing and Third Parties',
     'privacy.sharingText': 'We may share your personal data with the following categories of recipients:',
     'privacy.sharingItem1': 'AI processing: Bot functionality is powered by AI models. All AI processing is performed within the European Union.',
-    'privacy.sharingItem2': 'Infrastructure providers: We use Hetzner (Germany/Finland) for server hosting, ensuring your data remains within the EU.',
+    'privacy.sharingItem2': 'Infrastructure: All servers are hosted within the European Union, ensuring your data remains in the EU.',
     'privacy.sharingItem3': 'Authentication: Google OAuth 2.0 is used for account authentication. Google processes data according to their privacy policy.',
     'privacy.sharingNote': 'We do not sell your personal data to third parties.',
 
@@ -214,7 +214,7 @@ export const translations = {
     'privacy.sharingTitle': '4. Compartición de Datos y Terceros',
     'privacy.sharingText': 'Podemos compartir sus datos personales con las siguientes categorías de destinatarios:',
     'privacy.sharingItem1': 'Procesamiento de IA: Las funciones de los bots están impulsadas por modelos de IA. Todo el procesamiento de IA se realiza dentro de la Unión Europea.',
-    'privacy.sharingItem2': 'Proveedores de infraestructura: Utilizamos Hetzner (Alemania/Finlandia) para el alojamiento de servidores, asegurando que sus datos permanezcan dentro de la UE.',
+    'privacy.sharingItem2': 'Infraestructura: Todos los servidores están alojados dentro de la Unión Europea, asegurando que sus datos permanezcan en la UE.',
     'privacy.sharingItem3': 'Autenticación: Se utiliza Google OAuth 2.0 para la autenticación de cuentas. Google procesa los datos de acuerdo con su política de privacidad.',
     'privacy.sharingNote': 'No vendemos sus datos personales a terceros.',
 
