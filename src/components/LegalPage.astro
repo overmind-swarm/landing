@@ -67,10 +67,8 @@ function isListItem(key: string): boolean {
     </div>
 
     {pageSections.map((section) => {
-      const firstContentKey = section.contentKeys[0];
       const listItems = section.contentKeys.filter((k) => isListItem(k));
       const paragraphs = section.contentKeys.filter((k) => !isListItem(k));
-      const hasNote = section.contentKeys.some((k) => k.endsWith('Note') || k.endsWith('Exercise'));
       const noteKeys = section.contentKeys.filter((k) => k.endsWith('Note') || k.endsWith('Exercise'));
       const regularParagraphs = paragraphs.filter((k) => !k.endsWith('Note') && !k.endsWith('Exercise'));
 
