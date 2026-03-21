@@ -73,7 +73,7 @@ export const translations = {
 
     'privacy.sharingTitle': '4. Data Sharing and Third Parties',
     'privacy.sharingText': 'We may share your personal data with the following categories of recipients:',
-    'privacy.sharingItem1': 'AI providers: We use third-party AI model providers (such as Google Gemini and GitHub Copilot) to power bot functionality. Queries may be processed by these providers under their respective privacy policies.',
+    'privacy.sharingItem1': 'AI processing: Bot functionality is powered by AI models. All AI processing is performed within the European Union.',
     'privacy.sharingItem2': 'Infrastructure providers: We use Hetzner (Germany/Finland) for server hosting, ensuring your data remains within the EU.',
     'privacy.sharingItem3': 'Authentication: Google OAuth 2.0 is used for account authentication. Google processes data according to their privacy policy.',
     'privacy.sharingNote': 'We do not sell your personal data to third parties.',
@@ -213,7 +213,7 @@ export const translations = {
 
     'privacy.sharingTitle': '4. Compartición de Datos y Terceros',
     'privacy.sharingText': 'Podemos compartir sus datos personales con las siguientes categorías de destinatarios:',
-    'privacy.sharingItem1': 'Proveedores de IA: Utilizamos proveedores externos de modelos de IA (como Google Gemini y GitHub Copilot) para las funciones de los bots. Las consultas pueden ser procesadas por estos proveedores bajo sus respectivas políticas de privacidad.',
+    'privacy.sharingItem1': 'Procesamiento de IA: Las funciones de los bots están impulsadas por modelos de IA. Todo el procesamiento de IA se realiza dentro de la Unión Europea.',
     'privacy.sharingItem2': 'Proveedores de infraestructura: Utilizamos Hetzner (Alemania/Finlandia) para el alojamiento de servidores, asegurando que sus datos permanezcan dentro de la UE.',
     'privacy.sharingItem3': 'Autenticación: Se utiliza Google OAuth 2.0 para la autenticación de cuentas. Google procesa los datos de acuerdo con su política de privacidad.',
     'privacy.sharingNote': 'No vendemos sus datos personales a terceros.',
