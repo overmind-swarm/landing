@@ -28,5 +28,5 @@ patches:
                       topologyKey: kubernetes.io/hostname
             containers:
               - name: landing
-                image: registry.overmind-platform.svc:5000/landing:0.3.3
+                image: 10.0.0.5:5050/landing:0.3.3
                 imagePullPolicy: Always
