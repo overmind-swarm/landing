@@ -11,10 +11,8 @@ concurrency:
 
 env:
   IMAGE_NAME: landing
-  REGISTRY: registry.overmind-platform.svc:5000
+  REGISTRY: 10.0.0.5:5050
   DEPLOY_NAMESPACE: overmind-system
-  REGISTRY_SVC: svc/registry
-  REGISTRY_NAMESPACE: overmind-platform
   LOCAL_PORT: "5050"
 
 permissions:
@@ -98,19 +96,10 @@ jobs:
             -t localhost:${{ env.LOCAL_PORT }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.new_version }} \
             .
 
-      - name: Push to cluster registry
+      - name: Push to registry
         if: steps.version.outputs.skip != 'true'
         run: |
-          kubectl port-forward -n ${{ env.REGISTRY_NAMESPACE }} ${{ env.REGISTRY_SVC }} ${{ env.LOCAL_PORT }}:5000 &
-          PF_PID=$!
-          for i in $(seq 1 30); do
-            (echo > /dev/tcp/localhost/${{ env.LOCAL_PORT }}) 2>/dev/null && break
-            echo "Waiting for port-forward... ($i/30)"
-            sleep 1
-          done
-          (echo > /dev/tcp/localhost/${{ env.LOCAL_PORT }}) 2>/dev/null || { echo "Port-forward failed to start"; kill $PF_PID 2>/dev/null; exit 1; }
           docker push localhost:${{ env.LOCAL_PORT }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.new_version }}
-          kill $PF_PID 2>/dev/null
 
       - name: Deploy to production
         if: steps.version.outputs.skip != 'true'
