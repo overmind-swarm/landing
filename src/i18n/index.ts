@@ -51,7 +51,7 @@ export const translations = {
 
     // Privacy Policy
     'privacy.title': 'Privacy Policy',
-    'privacy.lastUpdated': 'Last updated: March 21, 2026',
+    'privacy.lastUpdated': 'Last updated: April 25, 2026',
     'privacy.intro': 'This Privacy Policy describes how CuriaBots ("we", "us", or "our") collects, uses, and protects your personal data when you use our platform at curiabots.com and related services (the "Service"). We are committed to protecting your privacy in accordance with the General Data Protection Regulation (EU) 2016/679 ("GDPR") and the Spanish Organic Law 3/2018 on Personal Data Protection ("LOPD-GDD").',
 
     'privacy.controllerTitle': '1. Data Controller',
@@ -63,6 +63,7 @@ export const translations = {
     'privacy.dataCollectedItem2': 'Usage data: Information about how you interact with the Service, including bot configurations, commands, and activity logs.',
     'privacy.dataCollectedItem3': 'Technical data: IP address, browser type, device information, and access timestamps collected automatically when you use the Service.',
     'privacy.dataCollectedItem4': 'Bot data: Content and files you create, upload, or generate through your AI bots, stored in isolated environments.',
+    'privacy.dataCollectedItem5': 'Authentication logs: Email address and IP address recorded during login and authentication events for security auditing purposes.',
 
     'privacy.purposeTitle': '3. Purpose and Legal Basis',
     'privacy.purposeText': 'We process your personal data for the following purposes:',
@@ -70,6 +71,7 @@ export const translations = {
     'privacy.purposeItem2': 'Service improvement: To analyze usage patterns, fix bugs, and improve the Service. Legal basis: legitimate interest (Art. 6(1)(f) GDPR).',
     'privacy.purposeItem3': 'Communication: To send you important service-related notifications. Legal basis: legitimate interest (Art. 6(1)(f) GDPR).',
     'privacy.purposeItem4': 'Legal compliance: To comply with applicable legal obligations. Legal basis: legal obligation (Art. 6(1)(c) GDPR).',
+    'privacy.purposeItem5': 'Security: To detect unauthorized access, investigate security incidents, and maintain audit trails through authentication logs. Legal basis: legitimate interest (Art. 6(1)(f) GDPR).',
 
     'privacy.sharingTitle': '4. Data Sharing and Third Parties',
     'privacy.sharingText': 'We may share your personal data with the following categories of recipients:',
@@ -79,7 +81,7 @@ export const translations = {
     'privacy.sharingNote': 'We do not sell your personal data to third parties.',
 
     'privacy.retentionTitle': '5. Data Retention',
-    'privacy.retentionText': 'We retain your personal data for as long as your account is active and as necessary to provide the Service. When you delete your account, we will delete your personal data and all associated bot data within 30 days, except where retention is required by law.',
+    'privacy.retentionText': 'We retain your personal data for as long as your account is active and as necessary to provide the Service. Authentication logs (email and IP address) are retained for up to 90 days for security purposes. When you delete your account, we will delete your personal data and all associated bot data within 30 days, except where retention is required by law.',
 
     'privacy.rightsTitle': '6. Your Rights',
     'privacy.rightsText': 'Under GDPR and LOPD-GDD, you have the following rights regarding your personal data:',
@@ -191,7 +193,7 @@ export const translations = {
 
     // Política de Privacidad
     'privacy.title': 'Política de Privacidad',
-    'privacy.lastUpdated': 'Última actualización: 21 de marzo de 2026',
+    'privacy.lastUpdated': 'Última actualización: 25 de abril de 2026',
     'privacy.intro': 'Esta Política de Privacidad describe cómo CuriaBots ("nosotros", "nos" o "nuestro") recopila, utiliza y protege sus datos personales cuando utiliza nuestra plataforma en curiabots.com y servicios relacionados (el "Servicio"). Estamos comprometidos con la protección de su privacidad de acuerdo con el Reglamento General de Protección de Datos (UE) 2016/679 ("RGPD") y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales ("LOPD-GDD").',
 
     'privacy.controllerTitle': '1. Responsable del Tratamiento',
@@ -203,6 +205,7 @@ export const translations = {
     'privacy.dataCollectedItem2': 'Datos de uso: Información sobre cómo interactúa con el Servicio, incluyendo configuraciones de bots, comandos y registros de actividad.',
     'privacy.dataCollectedItem3': 'Datos técnicos: Dirección IP, tipo de navegador, información del dispositivo y marcas de tiempo de acceso recopilados automáticamente cuando utiliza el Servicio.',
     'privacy.dataCollectedItem4': 'Datos de bots: Contenido y archivos que crea, sube o genera a través de sus bots de IA, almacenados en entornos aislados.',
+    'privacy.dataCollectedItem5': 'Logs de autenticación: Dirección de correo electrónico y dirección IP registrados durante eventos de inicio de sesión y autenticación con fines de auditoría de seguridad.',
 
     'privacy.purposeTitle': '3. Finalidad y Base Legal',
     'privacy.purposeText': 'Tratamos sus datos personales para las siguientes finalidades:',
@@ -210,6 +213,7 @@ export const translations = {
     'privacy.purposeItem2': 'Mejora del servicio: Para analizar patrones de uso, corregir errores y mejorar el Servicio. Base legal: interés legítimo (Art. 6(1)(f) RGPD).',
     'privacy.purposeItem3': 'Comunicación: Para enviarle notificaciones importantes relacionadas con el servicio. Base legal: interés legítimo (Art. 6(1)(f) RGPD).',
     'privacy.purposeItem4': 'Cumplimiento legal: Para cumplir con las obligaciones legales aplicables. Base legal: obligación legal (Art. 6(1)(c) RGPD).',
+    'privacy.purposeItem5': 'Seguridad: Para detectar accesos no autorizados, investigar incidentes de seguridad y mantener registros de auditoría mediante logs de autenticación. Base legal: interés legítimo (Art. 6(1)(f) RGPD).',
 
     'privacy.sharingTitle': '4. Compartición de Datos y Terceros',
     'privacy.sharingText': 'Podemos compartir sus datos personales con las siguientes categorías de destinatarios:',
@@ -219,7 +223,7 @@ export const translations = {
     'privacy.sharingNote': 'No vendemos sus datos personales a terceros.',
 
     'privacy.retentionTitle': '5. Conservación de Datos',
-    'privacy.retentionText': 'Conservamos sus datos personales mientras su cuenta esté activa y sea necesario para prestar el Servicio. Cuando elimine su cuenta, borraremos sus datos personales y todos los datos asociados a sus bots en un plazo de 30 días, salvo cuando la conservación sea exigida por ley.',
+    'privacy.retentionText': 'Conservamos sus datos personales mientras su cuenta esté activa y sea necesario para prestar el Servicio. Los logs de autenticación (correo electrónico y dirección IP) se conservan durante un máximo de 90 días con fines de seguridad. Cuando elimine su cuenta, borraremos sus datos personales y todos los datos asociados a sus bots en un plazo de 30 días, salvo cuando la conservación sea exigida por ley.',
 
     'privacy.rightsTitle': '6. Sus Derechos',
     'privacy.rightsText': 'En virtud del RGPD y la LOPD-GDD, usted tiene los siguientes derechos sobre sus datos personales:',
